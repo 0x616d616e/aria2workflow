@@ -32,13 +32,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Install Aria2 tool
-        run: |
-          sudo apt-get update
-          sudo apt-get install aria2 
       # Runs a set of commands using the runners shell
       - name: Download
         run: |
-          aria2c ${{ github.event.inputs.url }}
+          pwd
+          aria2c ${{ github.event.inputs.url }} --seed-time=0
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: /
+      
+      
           
