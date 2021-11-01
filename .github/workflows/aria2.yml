@@ -32,7 +32,7 @@ jobs:
           then
             aria2c ${{ github.event.inputs.url }} --seed-time=0
           else
-            aria2c -x${{ github.event.inputs.threads }} ${{ github.event.inputs.url }} --seed-time=0
+            aria2c -x${{ github.event.inputs.threads }} ${{ github.event.inputs.url }}
           fi
           
           
