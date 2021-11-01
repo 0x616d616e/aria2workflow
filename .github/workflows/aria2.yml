@@ -25,12 +25,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
       # Runs a set of commands using the runners shell
       - name: Download
         run: |
-          aria2c ${{ github.event.inputs.url }} --seed-time=0
+          if [ ${{ github.event.inputs.threads }} == null ]
+          then
+            aria2c ${{ github.event.inputs.url }} --seed-time=0
+          else
+            aria2c -x${{ github.event.inputs.threads }} ${{ github.event.inputs.url }} --seed-time=0
+          fi
+          
           
       - uses: actions/upload-artifact@v2
         with:
