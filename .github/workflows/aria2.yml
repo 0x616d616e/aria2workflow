@@ -28,7 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Download
         run: |
-          if [ ${{ github.event.inputs.threads }} == null ]
+          if [ ${{ github.event.inputs.threads }} == '' ]
           then
             aria2c ${{ github.event.inputs.url }} --seed-time=0
           else
